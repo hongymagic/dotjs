@@ -34,23 +34,23 @@ function initialState ($element, column) {
 
 function animationState ($element, column, row) {
 	var seed     = random (1, 5);
-	var duration = random (0.3, 1.5);
-	var delay    = seed * column * (random(20, 100) | 0);
+	var duration = random (0.3, 0.7);
+	var delay    = random(column || 1, column * seed) * 40;
 	setTimeout(function () {
 		$element.css({
 			'-webkit-transform'  : 'rotate3d(0, 1, 0, 0deg)',
-			'-webkit-transition' : 'all 1s'
+			'-webkit-transition' : 'all ' + duration + 's'
 		});
 
-		$element.on('webkitTransitionEnd', function (event) {
+		$element.one('webkitTransitionEnd', function (event) {
 			$element.removeAttr('style');
 		});
 	}, delay);
 }
 
 $calendar.css({
-	'-webkit-perspective': '1800px',
-	'perspective': '1800px'
+	'-webkit-perspective': '800px',
+	'perspective': '800px'
 });
 
 if ($days) {
