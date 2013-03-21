@@ -1,0 +1,19 @@
+{
+  "name": "dotjs-server",
+  "version": "0.0.0",
+  "description": "Simple dotjs server which runs on Node.js duh",
+  "main": "index.js",
+  "scripts": {
+    "test": "make"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/hongymagic/dotjs.git"
+  },
+  "keywords": [
+    "dotjs"
+  ],
+  "author": "David Hong",
+  "license": "MIT",
+  "gitHead": "60895b75893b6c0cb294bb9046c3cbb558936e14"
+}
