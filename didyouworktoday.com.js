@@ -27,7 +27,7 @@ function initialState ($element, column) {
 	var offsetX = (-1 * column * 130) + 'px';
 
 	return $element.css({
-		'-webkit-transform'          : 'translate3d(0, 0, 0) perspective(1800px) rotate3d(0, 1, 0, -90deg)',
+		'-webkit-transform'          : 'translate3d(0, 0, 0) rotate3d(0, 1, 0, -140deg)',
 		'-webkit-transform-origin-x' : offsetX
 	});
 }
@@ -38,11 +38,16 @@ function animationState ($element, column, row) {
 	var delay    = seed * column * (random(20, 100) | 0);
 	setTimeout(function () {
 		$element.css({
-			'-webkit-transform'  : 'perspective(1800px) rotate3d(0, 1, 0, 0deg)',
+			'-webkit-transform'  : 'rotate3d(0, 1, 0, 0deg)',
 			'-webkit-transition' : 'all 1s'
 		});
 	}, delay);
 }
+
+$calendar.css({
+	'-webkit-perspective': '1800px',
+	'perspective': '1800px'
+});
 
 if ($days) {
 	$days.each(function (index, element) {
