@@ -41,6 +41,10 @@ function animationState ($element, column, row) {
 			'-webkit-transform'  : 'rotate3d(0, 1, 0, 0deg)',
 			'-webkit-transition' : 'all 1s'
 		});
+
+		$element.on('webkitTransitionEnd', function (event) {
+			$element.removeAttr('style');
+		});
 	}, delay);
 }
 
