@@ -60,4 +60,57 @@ if ($days) {
 		var $element = initialState($(element), column);
 		animationState($element, column, row);
 	});
+
+	$days.on('click', 'a', function (event) {
+		event.preventDefault();
+
+		var $link   = $(this);
+		var command = new Command(this);
+		var result  = command.execute();
+		result
+			.then(command.success, command.failed)
+			.then(function () {
+				if (command.worked) {
+					$link.css({ 'background': 'green' });
+				} else {
+					$link.css({ 'background': 'red' });
+				}
+			});
+	});
 }
+
+function Command (anchor) {
+	var url   = anchor.getAttribute('href');
+	var $p    = $(anchor).find('p');
+	var state = $p.text().search(/yes/i) > -1;
+	var date  = /\?date=([^&]*)(.*)$/i.exec(anchor.search)[1];
+
+	this.anchor = anchor;
+	this.$p     = $p;
+	this.url    = url;
+	this.date   = date;
+	this.worked = !state;
+}
+
+Command.prototype = {
+	execute: function () {
+		var result = $.ajax(this.url, { context: this, data: this.toJSON() });
+		return result.then(this.success, this.failed);
+	},
+
+	success: function () {
+		var text = this.worked ? "Yes" : "No";
+		this.$p.text(text);
+	},
+
+	failed: function () {
+		console.error('Failed!', this, arguments);
+	},
+
+	toJSON: function () {
+		return {
+			'Command.Date': this.date,
+			'Command.DidYouWork': this.worked
+		};
+	}
+};
