@@ -65,16 +65,23 @@ if ($days) {
 		event.preventDefault();
 
 		var $link   = $(this);
+		var $day    = $link.parents('li');
 		var command = new Command(this);
 		var result  = command.execute();
 		result
 			.then(command.success, command.failed)
 			.then(function () {
+				var angle = 0;
 				if (command.worked) {
 					$link.css({ 'background': 'green' });
 				} else {
+					angle = 180;
 					$link.css({ 'background': 'red' });
 				}
+				$day.css({
+					'-webkit-transform': 'rotate3d(0, 1, 0, ' + angle + 'deg)',
+					'-webkit-transition': 'all 1s'
+				});
 			});
 	});
 }
