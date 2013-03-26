@@ -10,7 +10,7 @@ var $days     = $calendar.find('li');
 
 function initialize() {
 	$('*').css({
-		'-webkit-backface-visibility': 'hidden'
+		'backface-visibility': 'hidden'
 	});
 }
 
@@ -27,8 +27,8 @@ function initialState ($element, column) {
 	var offsetX = (-1 * column * 130) + 'px';
 
 	return $element.css({
-		'-webkit-transform'          : 'translate3d(0, 0, 0) rotate3d(0, 1, 0, -140deg)',
-		'-webkit-transform-origin-x' : offsetX
+		'transform'       : 'translate3d(0, 0, 0) rotate3d(0, 1, 0, -140deg)',
+		'transform-origin': offsetX
 	});
 }
 
@@ -38,18 +38,17 @@ function animationState ($element, column, row) {
 	var delay    = random(column || 1, column * seed) * 40;
 	setTimeout(function () {
 		$element.css({
-			'-webkit-transform'  : 'rotate3d(0, 1, 0, 0deg)',
-			'-webkit-transition' : 'all ' + duration + 's'
+			'transform'  : 'rotate3d(0, 1, 0, 0deg)',
+			'transition' : 'all ' + duration + 's'
 		});
 
-		$element.one('webkitTransitionEnd', function (event) {
+		$element.one('transitionEnd', function (event) {
 			$element.removeAttr('style');
 		});
 	}, delay);
 }
 
 $calendar.css({
-	'-webkit-perspective': '800px',
 	'perspective': '800px'
 });
 
@@ -79,8 +78,8 @@ if ($days) {
 					$link.css({ 'background': 'red' });
 				}
 				$day.css({
-					'-webkit-transform': 'rotate3d(0, 1, 0, ' + angle + 'deg)',
-					'-webkit-transition': 'all 1s'
+					'transform': 'rotate3d(0, 1, 0, ' + angle + 'deg)',
+					'transition': 'all 1s'
 				});
 			});
 	});
@@ -121,3 +120,5 @@ Command.prototype = {
 		};
 	}
 };
+
+console.log('didyouworktoday.com.js loaded');
